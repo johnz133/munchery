@@ -15,7 +15,7 @@ define(function(require, exports, module) {
     var titleView = new TitleView();
     var titleModifier = new StateModifier({
     	opacity: 1,
-    	tranform: Transform.translate(0,0,2)
+    	tranform: Transform.translate(0,0)
     });
 
     mainContext.add(titleModifier).add(titleView);

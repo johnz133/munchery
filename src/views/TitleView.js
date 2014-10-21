@@ -27,7 +27,7 @@ define(function(require, exports, module) {
         this.muncheryModifier = new StateModifier({
             align: [0.5, 0.5],
             origin: [.5, .5],
-            transform: Transform.translate(2,0,2),
+            transform: Transform.translate(2,0,0.1),
         });
 
         var backgroundSurface = new Surface({
