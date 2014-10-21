@@ -19,20 +19,21 @@ define(function(require, exports, module) {
     TitleView.DEFAULT_OPTIONS = {};
 
     function _createSurfaces() {
-        var muncheryImage = new ImageSurface({
-            content: 'img/muncheryLogoNoKF.png',
-            size:[210,150]
-        });
-        this.muncheryModifier = new StateModifier({
-            align: [0.5, 0.5],
-            origin: [.5, .5],
-            transform: Transform.translate(2,0,2),
-        });
 
         var backgroundSurface = new Surface({
             properties: {
                 backgroundColor: 'rgb(252,252,251)'
             }
+        });
+        var muncheryImage = new ImageSurface({
+            content: 'img/muncheryLogoNoKF.png',
+            size:[210,150],
+            pointerEvents : 'none'
+        });
+        this.muncheryModifier = new StateModifier({
+            align: [0.5, 0.5],
+            origin: [.5, .5],
+            transform: Transform.translate(2,0),
         });
 
         var knife = new ImageSurface({
@@ -68,15 +69,19 @@ define(function(require, exports, module) {
     }
 
     TitleView.prototype.animate = function() {
-        //this.muncheryModifier.setOpacity(0, { duration : 300, curve: 'easeOut'});
+        this.muncheryModifier.setOpacity(0, { duration : 300, curve: 'easeOut'});
         this.forkRotateModifier.setTransform(function() {
             return Transform.rotateY(.013 * (Date.now()));
         });
         this.knifeRotateModifier.setTransform(function(){
             return Transform.rotateY(.013 * Date.now() -.5);
         })
-        //this.knifeModifier.setTransform(Transform.translate(0,-200,0), {duration: 200});
-        //Timer.setTimeout(this.forkModifier.setTransform(Transform.translate(0,-200,0)),200);
+        this.knifeModifier.setTransform(Transform.translate(10,-200,1), {duration: 500, curve: 'easeIn'});
+        this.forkModifier.setTransform(Transform.translate(-10,-200,1), {duration: 500, curve: 'easeOut'});
+        Timer.setTimeout(function(){
+            this.knifeModifier.setTransform(Transform.translate(10,400,1), {duration: 700});
+            this.forkModifier.setTransform(Transform.translate(-10,400,1), {duration: 700});
+        }.bind(this),1500);
     };
     module.exports = TitleView;
 });

@@ -14,7 +14,8 @@ define(function(require, exports, module) {
 
     var titleView = new TitleView();
     var titleModifier = new StateModifier({
-    	opacity: 1
+    	opacity: 1,
+    	tranform: Transform.translate(0,0,2)
     });
 
     mainContext.add(titleModifier).add(titleView);
@@ -23,7 +24,7 @@ define(function(require, exports, module) {
     Timer.setTimeout(function(){
 	    titleModifier.setOpacity(0, { duration : 300, curve: 'easeOut'});
 	    titleModifier.setTransform(
-	    	Transform.translate(0,0,-1)
+	    	Transform.translate(0,0,-1),{ duration : 600}
 	    );
     },800);
 
