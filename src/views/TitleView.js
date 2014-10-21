@@ -37,13 +37,14 @@ define(function(require, exports, module) {
 
         var knife = new ImageSurface({
             content: 'img/knife.png',
-            size: [9,41]
+            size: [9,41],
+            classes: ['backfaceVisibility']
         });
 
         var fork = new ImageSurface({
             content: 'img/fork.png',
             size: [9,41],
-            classes: ['backfaceVisibility'],
+            classes: ['backfaceVisibility']
         });
 
         this.knifeModifier = new StateModifier({
