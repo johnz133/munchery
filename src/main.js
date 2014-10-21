@@ -26,7 +26,7 @@ define(function(require, exports, module) {
 	    titleModifier.setTransform(
 	    	Transform.translate(0,0,-1),{ duration : 600}
 	    );
-    },800);
+    },1000);
 
     introView.on("exitIntro", function(){
     	introView.render = function(){ return null; };

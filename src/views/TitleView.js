@@ -26,7 +26,7 @@ define(function(require, exports, module) {
             }
         });
         var muncheryImage = new ImageSurface({
-            content: 'img/muncheryLogoNoKF.png',
+            content: 'img/muncheryLogo.png',
             size:[210,150],
             pointerEvents : 'none'
         });
@@ -66,6 +66,7 @@ define(function(require, exports, module) {
         this.add(this.forkModifier).add(this.forkRotateModifier).add(fork);
         this.add(this.muncheryModifier).add(muncheryImage);
         this.add(backgroundSurface);
+        Timer.setTimeout(function(){ muncheryImage.setContent('img/muncheryLogoNoKF.png')},1000);
     }
 
     TitleView.prototype.animate = function() {
