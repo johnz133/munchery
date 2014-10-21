@@ -19,14 +19,14 @@ define(function(require, exports, module) {
     });
 
     mainContext.add(titleModifier).add(titleView);
-    mainContext.add(introView);
-
+    //mainContext.add(introView);
+    titleView.animate();
     Timer.setTimeout(function(){
 	    titleModifier.setOpacity(0, { duration : 300, curve: 'easeOut'});
 	    titleModifier.setTransform(
 	    	Transform.translate(0,0,-1),{ duration : 600}
 	    );
-    },1000);
+    },3000);
 
     introView.on("exitIntro", function(){
     	introView.render = function(){ return null; };
