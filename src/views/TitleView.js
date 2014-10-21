@@ -37,13 +37,15 @@ define(function(require, exports, module) {
         });
 
         var knife = new ImageSurface({
-            content: 'img/knife.png',
-            size: [9,41]
+            content: 'img/knifeSmall.png',
+            size: [9,41],
+            classes: ['backfaceVisibility']
         });
 
         var fork = new ImageSurface({
-            content: 'img/fork.png',
-            size: [9,41]
+            content: 'img/forkSmall.png',
+            size: [9,41],
+            classes: ['backfaceVisibility']
         });
 
         this.knifeModifier = new StateModifier({
@@ -59,31 +61,45 @@ define(function(require, exports, module) {
         this.forkRotateModifier = new Modifier({
             origin: [0.5,0.5]
         });
-        this.knifeRotateModifier = new Modifier({
+        this.knifeRotateModifier = new StateModifier({
             origin: [0.5,0.5]
         })
         this.add(this.knifeModifier).add(this.knifeRotateModifier).add(knife);
         this.add(this.forkModifier).add(this.forkRotateModifier).add(fork);
         this.add(this.muncheryModifier).add(muncheryImage);
-        //this.add(backgroundSurface);
-        Timer.setTimeout(function(){ muncheryImage.setContent('img/muncheryLogoNoKF.png')},1000);
+        this.add(backgroundSurface);
+        Timer.setTimeout(function(){ muncheryImage.setContent('img/muncheryLogoNoKF.png')},3000);
     }
 
     TitleView.prototype.animate = function() {
-        //this.muncheryModifier.setOpacity(0, { duration : 300, curve: 'easeOut'});
+        this.muncheryModifier.setOpacity(0, { duration : 300, curve: 'easeOut'});
         this.muncheryModifier.setTransform(Transform.translate(2,0,1));
+        
+        //Timer.setTimeout(function(){
+        var knifeRotate = this.knifeRotateModifier;
+        this.knifeRotateModifier.setTransform(Transform.rotateY(Math.PI), { 
+        curve:'linear', duration:800},
+        function() {
+              knifeRotate.setTransform(Transform.rotateY(2*Math.PI), 
+               { duration: 800, curve:'linear'});
+           }.bind(this));
+        /*this.knifeRotateModifier.setTransform(function(){
+            return Transform.rotateY(.016 * Date.now() -.5);
+        });
+
+        }.bind(this),20); 
+
         this.forkRotateModifier.setTransform(function() {
             return Transform.rotateY(.016 * (Date.now()));
         });
-        this.knifeRotateModifier.setTransform(function(){
-            return Transform.rotateY(.016 * Date.now() -.5);
-        });
+        */
         //this.knifeModifier.setTransform(Transform.translate(10,-200,2), {duration: 500, curve: 'easeIn'});
         //this.forkModifier.setTransform(Transform.translate(-10,-200,2), {duration: 500, curve: 'easeOut'});
         Timer.setTimeout(function(){
             this.knifeModifier.setTransform(Transform.translate(10,500,2), {duration: 700});
             this.forkModifier.setTransform(Transform.translate(-10,500,2), {duration: 700});
         }.bind(this),2000);
+        
     };
     module.exports = TitleView;
 });
