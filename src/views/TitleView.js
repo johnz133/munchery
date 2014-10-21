@@ -75,14 +75,24 @@ define(function(require, exports, module) {
         this.muncheryModifier.setOpacity(0, { duration : 300, curve: 'easeOut'});
         this.muncheryModifier.setTransform(Transform.translate(2,0,1));
         
+        Timer.every(function(){
+            this.knifeRotateModifier.setTransform(
+                Transform.rotateY(.016 * Date.now() -.5), {duration:10, curve:'easeOut'}
+            );
+            this.forkRotateModifier.setTransform(
+                Transform.rotateY(.016 * Date.now()), {duration:10, curve:'easeOut'}
+            );
+        }.bind(this), 2);
         //Timer.setTimeout(function(){
-        var knifeRotate = this.knifeRotateModifier;
+        
+        /*var knifeRotate = this.knifeRotateModifier;
         this.knifeRotateModifier.setTransform(Transform.rotateY(Math.PI), { 
         curve:'linear', duration:800},
         function() {
               knifeRotate.setTransform(Transform.rotateY(2*Math.PI), 
                { duration: 800, curve:'linear'});
            }.bind(this));
+        */
         /*this.knifeRotateModifier.setTransform(function(){
             return Transform.rotateY(.016 * Date.now() -.5);
         });
