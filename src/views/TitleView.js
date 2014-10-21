@@ -73,9 +73,7 @@ define(function(require, exports, module) {
             function() {
             return Transform.rotateY(.015 * (Date.now()));
         });
-        this.kRotateModifier.setTransform(function(){
-            return Transform.rotateY(.01 * Date.now());
-        })
+        
     };
     module.exports = TitleView;
 });
