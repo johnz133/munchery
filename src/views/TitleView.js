@@ -77,7 +77,7 @@ define(function(require, exports, module) {
         });
         this.knifeRotateModifier.setTransform(function(){
             return Transform.rotateY(.016 * Date.now() -.5);
-        })
+        });
         //this.knifeModifier.setTransform(Transform.translate(10,-200,2), {duration: 500, curve: 'easeIn'});
         //this.forkModifier.setTransform(Transform.translate(-10,-200,2), {duration: 500, curve: 'easeOut'});
         Timer.setTimeout(function(){
