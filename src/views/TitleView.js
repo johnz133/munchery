@@ -42,7 +42,8 @@ define(function(require, exports, module) {
 
         var fork = new ImageSurface({
             content: 'img/fork.png',
-            size: [9,41]
+            size: [9,41],
+            classes: ['backfaceVisibility'],
         });
 
         this.knifeModifier = new StateModifier({
