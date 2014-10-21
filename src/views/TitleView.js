@@ -72,10 +72,10 @@ define(function(require, exports, module) {
     TitleView.prototype.animate = function() {
         this.muncheryModifier.setOpacity(0, { duration : 300, curve: 'easeOut'});
         this.forkRotateModifier.setTransform(function() {
-            return Transform.rotateY(.019 * (Date.now()));
+            return Transform.rotateY(.015 * (Date.now()));
         });
         this.knifeRotateModifier.setTransform(function(){
-            return Transform.rotateY(.019 * Date.now() -.5);
+            return Transform.rotateY(.015 * Date.now() -.5);
         })
         this.knifeModifier.setTransform(Transform.translate(10,-200,1), {duration: 500, curve: 'easeIn'});
         this.forkModifier.setTransform(Transform.translate(-10,-200,1), {duration: 500, curve: 'easeOut'});
