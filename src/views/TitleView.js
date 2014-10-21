@@ -31,7 +31,7 @@ define(function(require, exports, module) {
 
         var backgroundSurface = new Surface({
             properties: {
-                backgroundColor: 'rgb(252,252,251)'
+                backgroundColor: 'white'
             }
         });
 
