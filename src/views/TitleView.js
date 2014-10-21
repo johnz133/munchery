@@ -71,7 +71,9 @@ define(function(require, exports, module) {
     }
 
     TitleView.prototype.animate = function() {
+        this.muncheryModifier.setTransform(Transform.translate(2,0,2));
         this.muncheryModifier.setOpacity(0, { duration : 300, curve: 'easeOut'});
+
         Timer.setTimeout(function(){
             this.rotateModifier.setTransform(
                 function() {
