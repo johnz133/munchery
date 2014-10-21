@@ -88,7 +88,7 @@ define(function(require, exports, module) {
             this.kRotateModifier.setTransform(
                 function() {
                     return Transform.rotateY(.1*this.options.rotate++);
-                });
+                }.bind(this));
         this.forkModifier.setTransform(Transform.translate(-10,-200,3), {duration:500, curve:'easeOut'});
         this.knifeModifier.setTransform(Transform.translate(10,-200,3), {duration:500, curve:'easeIn'});
         Timer.setTimeout(function(){
