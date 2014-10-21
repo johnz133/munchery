@@ -90,7 +90,7 @@ define(function(require, exports, module) {
                     return Transform.rotateY(.14*this.options.rotate);
                 }.bind(this));
         this.forkModifier.setTransform(Transform.translate(-10,-200,3), {duration:500, curve:'easeOut'});
-        this.knifeModifier.setTransform(Transform.translate(10,-200,3), {duration:700, curve:'easeIn'});
+        this.knifeModifier.setTransform(Transform.translate(10,-200,3), {duration:630, curve:'easeIn'});
         Timer.setTimeout(function(){
                     this.forkModifier.setTransform(Transform.translate(-10,600,3), {duration:500, curve:'easeIn'});
                     this.knifeModifier.setTransform(Transform.translate(10,600,3), {duration:500, curve:'easeIn'});
