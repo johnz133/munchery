@@ -19,7 +19,7 @@ define(function(require, exports, module) {
     });
 
     mainContext.add(titleModifier).add(titleView);
-    mainContext.add(introView);
+    mainContext.add(new StateModifier({tranform: Transform.translate(0,0,4)})).add(introView);
     //titleView.animate();
     Timer.setTimeout(function(){
 	    titleModifier.setOpacity(0, { duration : 300, curve: 'easeOut'});

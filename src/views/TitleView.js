@@ -72,16 +72,17 @@ define(function(require, exports, module) {
 
     TitleView.prototype.animate = function() {
         this.muncheryModifier.setOpacity(0, { duration : 300, curve: 'easeOut'});
-        //this.forkModifier.setTransform( Transform.trans)
-        this.rotateModifier.setTransform(
-            function() {
-            return Transform.rotateY(.007 * (Date.now()));
-        });
-        
-        this.kRotateModifier.setTransform(
-            function() {
-            return Transform.rotateY(.01 * (Date.now()));
-        });
+        Timer.setTimeout(function(){
+            this.rotateModifier.setTransform(
+                function() {
+                    return Transform.rotateY(.007 * (Date.now()));
+                });
+
+            this.kRotateModifier.setTransform(
+                function() {
+                    return Transform.rotateY(.01 * (Date.now()));
+                });
+        }.bind(this), 300);
 
         this.forkModifier.setTransform(Transform.translate(-10,-200,3), {duration:500, curve:'easeOut'});
         this.knifeModifier.setTransform(Transform.translate(10,-200,3), {duration:500, curve:'easeIn'});
