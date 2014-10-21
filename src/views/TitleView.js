@@ -7,7 +7,7 @@ define(function(require, exports, module) {
     var Modifier      = require('famous/core/Modifier');
     var StateModifier = require('famous/modifiers/StateModifier');
     var ImageSurface  = require('famous/surfaces/ImageSurface')
-    var Timer         = require('famous/utilities/Timer');
+
     function TitleView() {
         View.apply(this, arguments);
         _createSurfaces.call(this);
@@ -19,106 +19,63 @@ define(function(require, exports, module) {
     TitleView.DEFAULT_OPTIONS = {};
 
     function _createSurfaces() {
+        var muncheryImage = new ImageSurface({
+            content: 'img/muncheryLogoNoKF.png',
+            size:[210,150]
+        });
+        this.muncheryModifier = new StateModifier({
+            align: [0.5, 0.5],
+            origin: [.5, .5],
+            transform: Transform.translate(2,0,2),
+        });
 
         var backgroundSurface = new Surface({
             properties: {
                 backgroundColor: 'rgb(252,252,251)'
             }
         });
-        var muncheryImage = new ImageSurface({
-            content: 'img/muncheryLogo.png',
-            size:[210,150],
-            pointerEvents : 'none',
-            properties: {
-                backgroundColor: 'rgb(252,252,251)'
-            }
-        });
-        this.muncheryModifier = new StateModifier({
-            align: [0.5, 0.5],
-            origin: [.5, .5],
-            transform: Transform.translate(2,0),
-        });
 
         var knife = new ImageSurface({
-            content: 'img/knifeSmall.png',
-            size: [9,41],
-            classes: ['backfaceVisibility'],
-            properties: {
-                backgroundColor: 'rgb(252,252,251)'
-            }
+            content: 'img/knife.png',
+            size: [9,41]
         });
 
         var fork = new ImageSurface({
-            content: 'img/forkSmall.png',
-            size: [9,41],
-            classes: ['backfaceVisibility'],
-            properties: {
-                backgroundColor: 'rgb(252,252,251)'
-            }
+            content: 'img/fork.png',
+            size: [9,41]
         });
 
         this.knifeModifier = new StateModifier({
             align: [0.5, 0.5],
             origin: [0.5, 0.5],
-            transform: Transform.translate(10,-45,1)
+            transform: Transform.translate(10,-45,3)
         });
         this.forkModifier = new StateModifier({
             align: [0.5, 0.5],
             origin: [0.5, 0.5],
-            transform: Transform.translate(-10,-45,1)
+            transform: Transform.translate(-10,-45,3)
         });
-        this.forkRotateModifier = new StateModifier({
+        this.rotateModifier = new Modifier({
             origin: [0.5,0.5]
         });
-        this.knifeRotateModifier = new StateModifier({
+        this.kRotateModifier = new Modifier({
             origin: [0.5,0.5]
         })
-        this.add(this.knifeModifier).add(this.knifeRotateModifier).add(knife);
-        this.add(this.forkModifier).add(this.forkRotateModifier).add(fork);
+        this.add(this.knifeModifier).add(this.kRotateModifier).add(knife);
+        this.add(this.forkModifier).add(this.rotateModifier).add(fork);
         this.add(this.muncheryModifier).add(muncheryImage);
-        //this.add(backgroundSurface);
-        Timer.setTimeout(function(){ muncheryImage.setContent('img/muncheryLogoNoKF.png')},3000);
+        this.add(backgroundSurface);
     }
 
     TitleView.prototype.animate = function() {
-        this.muncheryModifier.setOpacity(0, { duration : 300, curve: 'easeOut'});
-        this.muncheryModifier.setTransform(Transform.translate(2,0,1));
-        //this.knifeModifier.setTransform(Transform.translate(10,-200,1), {duration: 500, curve: 'easeIn'});
-        //this.forkModifier.setTransform(Transform.translate(-10,-200,1), {duration: 500, curve: 'easeOut'});
-        
-        Timer.every(function(){
-            this.knifeRotateModifier.setTransform(
-                Transform.rotateY(.016 * Date.now() -.5), {duration:2, curve:'easeOut'}
-            );
-            this.forkRotateModifier.setTransform(
-                Transform.rotateY(.016 * Date.now()), {duration:2, curve:'easeOut'}
-            );
-        }.bind(this), 2);
-        //Timer.setTimeout(function(){
-        
-        /*var knifeRotate = this.knifeRotateModifier;
-        this.knifeRotateModifier.setTransform(Transform.rotateY(Math.PI), { 
-        curve:'linear', duration:800},
-        function() {
-              knifeRotate.setTransform(Transform.rotateY(2*Math.PI), 
-               { duration: 800, curve:'linear'});
-           }.bind(this));
-        */
-        /*this.knifeRotateModifier.setTransform(function(){
-            return Transform.rotateY(.016 * Date.now() -.5);
+        //this.muncheryModifier.setOpacity(0, { duration : 300, curve: 'easeOut'});
+        this.rotateModifier.setTransform(
+            function() {
+            return Transform.rotateY(.015 * (Date.now()));
         });
-
-        }.bind(this),20); 
-
-        this.forkRotateModifier.setTransform(function() {
-            return Transform.rotateY(.016 * (Date.now()));
-        });
-        */
-        Timer.setTimeout(function(){
-            this.knifeModifier.setTransform(Transform.translate(10,500,2), {duration: 700});
-            this.forkModifier.setTransform(Transform.translate(-10,500,2), {duration: 700});
-        }.bind(this),2000);
-        
+        this.kRotateModifier.setTransform(function(){
+            return Transform.rotateY(.01 * Date.now());
+        })
     };
     module.exports = TitleView;
 });
