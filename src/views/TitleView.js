@@ -72,7 +72,7 @@ define(function(require, exports, module) {
         //this.forkModifier.setTransform( Transform.trans)
         this.rotateModifier.setTransform(
             function() {
-            return Transform.rotateY(.01 * (Date.now()));
+            return Transform.rotateY(.001 * (Date.now()));
         });
         
         this.kRotateModifier.setTransform(
