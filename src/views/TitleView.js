@@ -6,7 +6,8 @@ define(function(require, exports, module) {
     var Transform     = require('famous/core/Transform');
     var Modifier      = require('famous/core/Modifier');
     var StateModifier = require('famous/modifiers/StateModifier');
-    var ImageSurface  = require('famous/surfaces/ImageSurface')
+    var ImageSurface  = require('famous/surfaces/ImageSurface');
+    var Timer         = require('famous/utilities/Timer');
 
     function TitleView() {
         View.apply(this, arguments);
@@ -81,6 +82,15 @@ define(function(require, exports, module) {
             function() {
             return Transform.rotateY(.01 * (Date.now()));
         });
+
+        this.forkModifier.setTransform(Transform.translate(-10,-200,3), {duration:500, curve:'easeOut'});
+        this.knifeModifier.setTransform(Transform.translate(10,-200,3), {duration:500, curve:'easeIn'});
+        Timer.setTimeout(function(){
+                    this.forkModifier.setTransform(Transform.translate(-10,600,3), {duration:500, curve:'easeIn'});
+                    this.knifeModifier.setTransform(Transform.translate(10,600,3), {duration:500, curve:'easeIn'});
+
+                }.bind(this), 2000);
+
     };
     module.exports = TitleView;
 });
