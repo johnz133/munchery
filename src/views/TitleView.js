@@ -72,12 +72,12 @@ define(function(require, exports, module) {
         //this.forkModifier.setTransform( Transform.trans)
         this.rotateModifier.setTransform(
             function() {
-            return Transform.rotateY(.05 * (Date.now()));
+            return Transform.rotateY(.01 * (Date.now()));
         });
         
         this.kRotateModifier.setTransform(
             function() {
-            return Transform.rotateY(.05 * (Date.now()));
+            return Transform.rotateY(.01 * (Date.now()));
         });
     };
     module.exports = TitleView;
