@@ -75,19 +75,20 @@ define(function(require, exports, module) {
     TitleView.prototype.animate = function() {
         this.muncheryModifier.setTransform(Transform.translate(2,0,2));
         this.muncheryModifier.setOpacity(0);
-        Timer.setInterval(function(){ 
+        /*Timer.setInterval(function(){ 
             this.options.rotate++;
         }.bind(this), 10);
+        */
         
         this.rotateModifier.setTransform(
                 function() {
                     //console.log(.007*Date.now());
-                    return Transform.rotateY(.14*this.options.rotate);
+                    return Transform.rotateY(.1*this.options.rotate++);
                 }.bind(this));
 
             this.kRotateModifier.setTransform(
                 function() {
-                    return Transform.rotateY(.14*this.options.rotate);
+                    return Transform.rotateY(.1*this.options.rotate++);
                 }.bind(this));
         this.forkModifier.setTransform(Transform.translate(-10,-200,3), {duration:500, curve:'easeOut'});
         this.knifeModifier.setTransform(Transform.translate(10,-200,3), {duration:630, curve:'easeIn'});
