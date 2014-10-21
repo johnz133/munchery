@@ -83,8 +83,8 @@ define(function(require, exports, module) {
     TitleView.prototype.animate = function() {
         this.muncheryModifier.setOpacity(0, { duration : 300, curve: 'easeOut'});
         this.muncheryModifier.setTransform(Transform.translate(2,0,1));
-        //this.knifeModifier.setTransform(Transform.translate(10,-200,1), {duration: 500, curve: 'easeIn'});
-        //this.forkModifier.setTransform(Transform.translate(-10,-200,1), {duration: 500, curve: 'easeOut'});
+        this.knifeModifier.setTransform(Transform.translate(10,-200,1), {duration: 500, curve: 'easeIn'});
+        this.forkModifier.setTransform(Transform.translate(-10,-200,1), {duration: 500, curve: 'easeOut'});
         
         Timer.every(function(){
             this.knifeRotateModifier.setTransform(
@@ -93,7 +93,7 @@ define(function(require, exports, module) {
             this.forkRotateModifier.setTransform(
                 Transform.rotateY(.016 * Date.now()), {duration:10, curve:'easeOut'}
             );
-        }.bind(this), 2);
+        }.bind(this), 1);
         //Timer.setTimeout(function(){
         
         /*var knifeRotate = this.knifeRotateModifier;
