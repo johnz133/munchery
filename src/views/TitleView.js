@@ -28,7 +28,10 @@ define(function(require, exports, module) {
         var muncheryImage = new ImageSurface({
             content: 'img/muncheryLogo.png',
             size:[210,150],
-            pointerEvents : 'none'
+            pointerEvents : 'none',
+            properties: {
+                backgroundColor: 'rgb(252,252,251)'
+            }
         });
         this.muncheryModifier = new StateModifier({
             align: [0.5, 0.5],
@@ -57,12 +60,12 @@ define(function(require, exports, module) {
         this.knifeModifier = new StateModifier({
             align: [0.5, 0.5],
             origin: [0.5, 0.5],
-            transform: Transform.translate(10,-45,3)
+            transform: Transform.translate(10,-45,1)
         });
         this.forkModifier = new StateModifier({
             align: [0.5, 0.5],
             origin: [0.5, 0.5],
-            transform: Transform.translate(-10,-45,3)
+            transform: Transform.translate(-10,-45,1)
         });
         this.forkRotateModifier = new Modifier({
             origin: [0.5,0.5]
@@ -73,15 +76,15 @@ define(function(require, exports, module) {
         this.add(this.knifeModifier).add(this.knifeRotateModifier).add(knife);
         this.add(this.forkModifier).add(this.forkRotateModifier).add(fork);
         this.add(this.muncheryModifier).add(muncheryImage);
-        this.add(backgroundSurface);
+        //this.add(backgroundSurface);
         Timer.setTimeout(function(){ muncheryImage.setContent('img/muncheryLogoNoKF.png')},3000);
     }
 
     TitleView.prototype.animate = function() {
         this.muncheryModifier.setOpacity(0, { duration : 300, curve: 'easeOut'});
         this.muncheryModifier.setTransform(Transform.translate(2,0,1));
-        this.knifeModifier.setTransform(Transform.translate(10,-200,2), {duration: 500, curve: 'easeIn'});
-        this.forkModifier.setTransform(Transform.translate(-10,-200,2), {duration: 500, curve: 'easeOut'});
+        this.knifeModifier.setTransform(Transform.translate(10,-200,1), {duration: 500, curve: 'easeIn'});
+        this.forkModifier.setTransform(Transform.translate(-10,-200,1), {duration: 500, curve: 'easeOut'});
         
         Timer.every(function(){
             this.knifeRotateModifier.setTransform(
