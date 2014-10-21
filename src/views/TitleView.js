@@ -69,11 +69,16 @@ define(function(require, exports, module) {
 
     TitleView.prototype.animate = function() {
         this.muncheryModifier.setOpacity(0, { duration : 300, curve: 'easeOut'});
+        //this.forkModifier.setTransform( Transform.trans)
         this.rotateModifier.setTransform(
             function() {
-            return Transform.rotateY(.015 * (Date.now()));
+            return Transform.rotateY(.05 * (Date.now()));
         });
         
+        this.kRotateModifier.setTransform(
+            function() {
+            return Transform.rotateY(.05 * (Date.now()));
+        });
     };
     module.exports = TitleView;
 });

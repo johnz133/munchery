@@ -11,7 +11,7 @@ define(function(require, exports, module) {
     var introView = new IntroView({
     	screenSize: mainContext.getSize()
     });
-
+    mainContext.setPerspective(1200);
     var titleView = new TitleView();
     var titleModifier = new StateModifier({
     	opacity: 1,
