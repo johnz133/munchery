@@ -84,7 +84,7 @@ define(function(require, exports, module) {
                 function() {
                     return Transform.rotateY(.01 * (Date.now()));
                 });
-        }.bind(this), 300);
+        }.bind(this), 3);
 
         this.forkModifier.setTransform(Transform.translate(-10,-200,3), {duration:500, curve:'easeOut'});
         this.knifeModifier.setTransform(Transform.translate(10,-200,3), {duration:500, curve:'easeIn'});
