@@ -39,13 +39,19 @@ define(function(require, exports, module) {
         var knife = new ImageSurface({
             content: 'img/knifeSmall.png',
             size: [9,41],
-            classes: ['backfaceVisibility']
+            classes: ['backfaceVisibility'],
+            properties: {
+                backgroundColor: 'rgb(252,252,251)'
+            }
         });
 
         var fork = new ImageSurface({
             content: 'img/forkSmall.png',
             size: [9,41],
-            classes: ['backfaceVisibility']
+            classes: ['backfaceVisibility'],
+            properties: {
+                backgroundColor: 'rgb(252,252,251)'
+            }
         });
 
         this.knifeModifier = new StateModifier({
@@ -103,8 +109,8 @@ define(function(require, exports, module) {
             return Transform.rotateY(.016 * (Date.now()));
         });
         */
-        //this.knifeModifier.setTransform(Transform.translate(10,-200,2), {duration: 500, curve: 'easeIn'});
-        //this.forkModifier.setTransform(Transform.translate(-10,-200,2), {duration: 500, curve: 'easeOut'});
+        this.knifeModifier.setTransform(Transform.translate(10,-200,2), {duration: 500, curve: 'easeIn'});
+        this.forkModifier.setTransform(Transform.translate(-10,-200,2), {duration: 500, curve: 'easeOut'});
         Timer.setTimeout(function(){
             this.knifeModifier.setTransform(Transform.translate(10,500,2), {duration: 700});
             this.forkModifier.setTransform(Transform.translate(-10,500,2), {duration: 700});
