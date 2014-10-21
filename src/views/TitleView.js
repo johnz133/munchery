@@ -77,7 +77,7 @@ define(function(require, exports, module) {
         this.muncheryModifier.setOpacity(0, { duration : 600, curve: 'easeOut'});
         Timer.setInterval(function(){ 
             this.options.rotate++;
-        }.bind(this), 1);
+        }.bind(this), 10);
         
         this.rotateModifier.setTransform(
                 function() {
