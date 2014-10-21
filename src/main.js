@@ -31,6 +31,7 @@ define(function(require, exports, module) {
     introView.on("exitIntro", function(){
     	introView.render = function(){ return null; };
     	titleModifier.setOpacity(1, { duration : 300, curve: 'easeIn'});
+    	titleView.muncheryModifier.setTransform(Transform.translate(2,0,2));
     	Timer.setTimeout(function(){
     		titleView.animate();
     	},1000);
