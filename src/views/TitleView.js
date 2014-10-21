@@ -53,12 +53,12 @@ define(function(require, exports, module) {
         this.knifeModifier = new StateModifier({
             align: [0.5, 0.5],
             origin: [0.5, 0.5],
-            transform: Transform.translate(10,-45,2)
+            transform: Transform.translate(10,-45,1)
         });
         this.forkModifier = new StateModifier({
             align: [0.5, 0.5],
             origin: [0.5, 0.5],
-            transform: Transform.translate(-10,-45,2)
+            transform: Transform.translate(-10,-45,1)
         });
         this.rotateModifier = new Modifier({
             origin: [0.5,0.5]
@@ -90,8 +90,8 @@ define(function(require, exports, module) {
                 function() {
                     return Transform.rotateY(.1*this.options.rotate++);
                 }.bind(this));
-        this.forkModifier.setTransform(Transform.translate(-10,-200,2), {duration:500, curve:'easeOut'});
-        this.knifeModifier.setTransform(Transform.translate(10,-200,2), {duration:630, curve:'easeIn'});
+        this.forkModifier.setTransform(Transform.translate(-10,-200,1), {duration:500, curve:'easeOut'});
+        this.knifeModifier.setTransform(Transform.translate(10,-200,1), {duration:630, curve:'easeIn'});
         Timer.setTimeout(function(){
                     this.forkModifier.setTransform(Transform.translate(-10,600,3), {duration:500, curve:'easeIn'});
                     this.knifeModifier.setTransform(Transform.translate(10,600,3), {duration:500, curve:'easeIn'});
