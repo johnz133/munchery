@@ -65,7 +65,7 @@ define(function(require, exports, module) {
         this.add(this.knifeModifier).add(this.knifeRotateModifier).add(knife);
         this.add(this.forkModifier).add(this.forkRotateModifier).add(fork);
         this.add(this.muncheryModifier).add(muncheryImage);
-        this.add(backgroundSurface);
+        //this.add(backgroundSurface);
         Timer.setTimeout(function(){ muncheryImage.setContent('img/muncheryLogoNoKF.png')},1000);
     }
 
