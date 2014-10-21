@@ -82,12 +82,12 @@ define(function(require, exports, module) {
         this.rotateModifier.setTransform(
                 function() {
                     //console.log(.007*Date.now());
-                    return Transform.rotateY(.01*this.options.rotate);
+                    return Transform.rotateY(.2*this.options.rotate);
                 }.bind(this));
 
             this.kRotateModifier.setTransform(
                 function() {
-                    return Transform.rotateY(.01*this.options.rotate);
+                    return Transform.rotateY(.2*this.options.rotate);
                 }.bind(this));
         this.forkModifier.setTransform(Transform.translate(-10,-200,3), {duration:500, curve:'easeOut'});
         this.knifeModifier.setTransform(Transform.translate(10,-200,3), {duration:600, curve:'easeIn'});
