@@ -67,7 +67,7 @@ define(function(require, exports, module) {
             origin: [0.5, 0.5],
             transform: Transform.translate(-10,-45,1)
         });
-        this.forkRotateModifier = new Modifier({
+        this.forkRotateModifier = new StateModifier({
             origin: [0.5,0.5]
         });
         this.knifeRotateModifier = new StateModifier({
@@ -83,17 +83,17 @@ define(function(require, exports, module) {
     TitleView.prototype.animate = function() {
         this.muncheryModifier.setOpacity(0, { duration : 300, curve: 'easeOut'});
         this.muncheryModifier.setTransform(Transform.translate(2,0,1));
-        this.knifeModifier.setTransform(Transform.translate(10,-200,1), {duration: 500, curve: 'easeIn'});
-        this.forkModifier.setTransform(Transform.translate(-10,-200,1), {duration: 500, curve: 'easeOut'});
+        //this.knifeModifier.setTransform(Transform.translate(10,-200,1), {duration: 500, curve: 'easeIn'});
+        //this.forkModifier.setTransform(Transform.translate(-10,-200,1), {duration: 500, curve: 'easeOut'});
         
         Timer.every(function(){
             this.knifeRotateModifier.setTransform(
-                Transform.rotateY(.016 * Date.now() -.5), {duration:10, curve:'easeOut'}
+                Transform.rotateY(.016 * Date.now() -.5), {duration:2, curve:'easeOut'}
             );
             this.forkRotateModifier.setTransform(
-                Transform.rotateY(.016 * Date.now()), {duration:10, curve:'easeOut'}
+                Transform.rotateY(.016 * Date.now()), {duration:2, curve:'easeOut'}
             );
-        }.bind(this), 1);
+        }.bind(this), 2);
         //Timer.setTimeout(function(){
         
         /*var knifeRotate = this.knifeRotateModifier;
