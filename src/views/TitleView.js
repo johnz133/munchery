@@ -18,7 +18,7 @@ define(function(require, exports, module) {
     TitleView.prototype.constructor = TitleView;
 
     TitleView.DEFAULT_OPTIONS = {
-        rotate:98,
+        rotate:10,
     };
 
     function _createSurfaces() {
@@ -76,18 +76,18 @@ define(function(require, exports, module) {
         this.muncheryModifier.setTransform(Transform.translate(2,0,2));
         this.muncheryModifier.setOpacity(0, { duration : 600, curve: 'easeOut'});
         Timer.setInterval(function(){ 
-
-        }.bind(this), 1000);
+            this.options.rotate++;
+        }.bind(this), 10);
         
         this.rotateModifier.setTransform(
                 function() {
                     //console.log(.007*Date.now());
-                    return Transform.rotateY(.1*this.options.rotate++);
+                    return Transform.rotateY(.1*this.options.rotate);
                 }.bind(this));
 
             this.kRotateModifier.setTransform(
                 function() {
-                    return Transform.rotateY(.1*this.options.rotate++);
+                    return Transform.rotateY(.1*this.options.rotate);
                 }.bind(this));
         this.forkModifier.setTransform(Transform.translate(-10,-200,3), {duration:500, curve:'easeOut'});
         this.knifeModifier.setTransform(Transform.translate(10,-200,3), {duration:500, curve:'easeIn'});
