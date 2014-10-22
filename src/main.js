@@ -11,7 +11,7 @@ define(function(require, exports, module) {
     var Transform   = require('famous/core/Transform');
     var mainContext = Engine.createContext();
 
-    _createPageView.call(this);
+    //_createPageView.call(this);
 
     
     var introView = new IntroView({
