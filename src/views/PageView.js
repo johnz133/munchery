@@ -50,7 +50,8 @@ define(function(require, exports, module) {
     function _createHeader() {
         var backgroundSurface = new Surface({
             properties: {
-                backgroundColor: 'black'
+                backgroundColor: 'white',
+                boxShadow: '0 0 1px 0 rgba(0,0,0,0.5)'
             }
         });
 

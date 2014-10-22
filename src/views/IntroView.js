@@ -10,7 +10,6 @@ define(function(require, exports, module) {
     var Surface       = require('famous/core/Surface');
     var Transform     = require('famous/core/Transform');
     var StateModifier = require('famous/modifiers/StateModifier');
-    var Modifier      = require('famous/core/Modifier');
     var HeaderFooter  = require('famous/views/HeaderFooterLayout');
     var ImageSurface  = require('famous/surfaces/ImageSurface');
     var RenderNode    = require('famous/core/RenderNode');
@@ -19,7 +18,6 @@ define(function(require, exports, module) {
     var ScrollView    = require("famous/views/Scrollview");
     var SplashData    = require('data/SplashData');
     var Timer         = require('famous/utilities/Timer');
-    var RenderController = require("famous/views/RenderController");
 
     var GenericSync     = require('famous/inputs/GenericSync');
     var MouseSync       = require('famous/inputs/MouseSync');
@@ -150,16 +148,6 @@ define(function(require, exports, module) {
                 this.dotModifiers[Math.max(0,Math.floor((this.scrollView.getAbsolutePosition())/this.options.screenSize[0]))].setOpacity(1);
             }
         }.bind(this), 10);
-        /*this.sync.on('update', (function(data) {
-            for(var i = 0; i<this.dotModifiers.length; i++){
-                this.dotModifiers[i].setOpacity(0.5);
-            }
-            if(this.scrollView.getVelocity()>0){
-                this.dotModifiers[Math.max(0,Math.floor((this.scrollView.getAbsolutePosition()-this.options.screenSize[0]/2)/this.options.screenSize[0])+1)].setOpacity(1);
-            } else {
-                this.dotModifiers[Math.max(0,Math.floor((this.scrollView.getAbsolutePosition())/this.options.screenSize[0]))].setOpacity(1);
-            }
-        }).bind(this)); */
 
         this._eventInput.on('buttonClick', (function(){
             if(this.options.firstClick){

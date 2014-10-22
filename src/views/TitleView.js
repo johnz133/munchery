@@ -29,12 +29,12 @@ define(function(require, exports, module) {
         this.muncheryModifier = new StateModifier({
             align: [0.5, 0.5],
             origin: [.5, .5],
-            transform: Transform.translate(2,0,0.1),
+            transform: Transform.translate(2,0,2),
         });
 
         var backgroundSurface = new Surface({
             properties: {
-                backgroundColor: 'white'
+                backgroundColor: 'rgb(244,247,248)'
             }
         });
 
@@ -66,33 +66,36 @@ define(function(require, exports, module) {
         this.kRotateModifier = new Modifier({
             origin: [0.5,0.5]
         })
+        this.backgroundModifier = new StateModifier({
+            transform: Transform.translate(0,0,.1)
+        });
         this.add(this.knifeModifier).add(this.kRotateModifier).add(knife);
         this.add(this.forkModifier).add(this.rotateModifier).add(fork);
         this.add(this.muncheryModifier).add(muncheryImage);
-        this.add(backgroundSurface);
+        this.add(this.backgroundModifier).add(backgroundSurface);
     }
 
     TitleView.prototype.animate = function() {
-        this.muncheryModifier.setOpacity(0, { duration : 1000, curve: 'easeOut'});
+        this.muncheryModifier.setOpacity(0, { duration : 800, curve: 'easeOut'});
+        this.backgroundModifier.setTransform(Transform.translate(0,0,1.5));
+        this.rotateModifier.setTransform(function() {
+            return Transform.rotateY(.1*this.options.rotate++);
+        }.bind(this));
 
-        
-        this.rotateModifier.setTransform(
-                function() {
-                    //console.log(.007*Date.now());
-                    return Transform.rotateY(.1*this.options.rotate++);
-                }.bind(this));
+        this.kRotateModifier.setTransform(function() {
+            return Transform.rotateY(.1*this.options.rotate++);
+        }.bind(this));
 
-            this.kRotateModifier.setTransform(
-                function() {
-                    return Transform.rotateY(.1*this.options.rotate++);
-                }.bind(this));
         this.forkModifier.setTransform(Transform.translate(-10,-200,100), {duration:500, curve:'easeOut'});
         this.knifeModifier.setTransform(Transform.translate(10,-200,100), {duration:600, curve:'easeIn'});
         Timer.setTimeout(function(){
-                    this.forkModifier.setTransform(Transform.translate(-10,600,100), {duration:600, curve:'easeIn'});
-                    this.knifeModifier.setTransform(Transform.translate(10,600,100), {duration:600, curve:'easeIn'});
-
-                }.bind(this), 2000);
+            this.forkModifier.setTransform(Transform.translate(-10,600,100), {duration:600, curve:'easeIn'});
+            this.knifeModifier.setTransform(Transform.translate(10,600,100), {duration:600, curve:'easeIn'});
+            this.backgroundModifier.setOpacity(0, {duration:1200, curve: 'easeIn'});
+            Timer.setTimeout(function () {
+                this.render = function(){ return null;};
+            }.bind(this), 1200);
+        }.bind(this), 2000);
 
     };
     module.exports = TitleView;

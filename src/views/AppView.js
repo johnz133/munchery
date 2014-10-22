@@ -81,8 +81,9 @@ define(function(require, exports, module) {
             if(currentPosition === 0 && data.velocity > 0) {
                 this.menuView.animateStrips();
             }
-
-            this.pageViewPos.set(Math.max(0, currentPosition + data.delta));
+            if(this.menuToggle){
+                this.pageViewPos.set(Math.max(0, currentPosition + data.delta));
+            }
         }.bind(this));
 
         sync.on('end', (function(data) {
