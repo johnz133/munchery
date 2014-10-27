@@ -31,7 +31,7 @@ define(function(require, exports, module) {
     Timer.setTimeout(function () {
     	this.lightbox.hide(titleView);
     	this.lightbox.show(introView);
-    }.bind(this),1000);
+    }.bind(this),2000);
 
     introView.on("exitIntro", function(){
     	this.lightbox.hide(introView);

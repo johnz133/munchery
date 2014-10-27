@@ -67,7 +67,7 @@ define(function(require, exports, module) {
             origin: [0.5,0.5]
         })
         this.backgroundModifier = new StateModifier({
-            transform: Transform.translate(0,0,.1)
+            transform: Transform.translate(0,0,1.5)
         });
         this.add(this.knifeModifier).add(this.kRotateModifier).add(knife);
         this.add(this.forkModifier).add(this.rotateModifier).add(fork);
