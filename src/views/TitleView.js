@@ -68,7 +68,7 @@ define(function(require, exports, module) {
             origin: [0.5,0.5]
         })
         this.backgroundModifier = new StateModifier({
-            transform: Transform.translate(0,0,1.5)
+            transform: Transform.translate(0,0,2)
         });
         this.add(this.knifeModifier).add(this.kRotateModifier).add(knife);
         this.add(this.forkModifier).add(this.rotateModifier).add(fork);
@@ -78,7 +78,7 @@ define(function(require, exports, module) {
 
     TitleView.prototype.animate = function() {
         this.muncheryModifier.setOpacity(0, { duration : 800, curve: 'easeOut'});
-        this.backgroundModifier.setTransform(Transform.translate(0,0,4));
+        this.backgroundModifier.setTransform(Transform.translate(0,0,5));
         this.rotateModifier.setTransform(function() {
             return Transform.rotateY(.1*this.options.rotate++);
         }.bind(this));
