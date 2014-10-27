@@ -76,11 +76,11 @@ define(function(require, exports, module) {
         var buttonLayout = new FlexibleLayout({
             direction: 0,
             ratios: [2,50,2],
-            size: [undefined, 44]
+            size: [undefined, 33]
         });
         var buttonSurfaces = [];
         buttonSurfaces.push(new Surface({
-            size: [undefined, 44],
+            size: [undefined, 3],
             properties: {
                 backgroundColor: 'rgb(244, 247, 248)'
             }
@@ -90,14 +90,14 @@ define(function(require, exports, module) {
             properties:{
                 color: 'white',
                 textAlign: 'center',
-                lineHeight: "44px",
+                lineHeight: "33px",
                 verticalAlign: "middle",
                 backgroundColor: 'rgb(240,114,73)'
             },
-            size: [undefined, 44]
+            size: [undefined, 33]
         }));
         buttonSurfaces.push(new Surface({
-            size: [undefined, 44],
+            size: [undefined, 33],
             properties: {
                 backgroundColor: 'rgb(244, 247, 248)'
             }
