@@ -33,6 +33,7 @@ define(function(require, exports, module) {
         });
 
         var backgroundSurface = new Surface({
+            size: [undefined, undefined],
             properties: {
                 backgroundColor: 'rgb(244,247,248)'
             }
@@ -77,7 +78,7 @@ define(function(require, exports, module) {
 
     TitleView.prototype.animate = function() {
         this.muncheryModifier.setOpacity(0, { duration : 800, curve: 'easeOut'});
-        this.backgroundModifier.setTransform(Transform.translate(0,0,1.5));
+        this.backgroundModifier.setTransform(Transform.translate(0,0,2));
         this.rotateModifier.setTransform(function() {
             return Transform.rotateY(.1*this.options.rotate++);
         }.bind(this));
