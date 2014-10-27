@@ -18,17 +18,12 @@ define(function(require, exports, module) {
     var ScrollView    = require("famous/views/Scrollview");
     var SplashData    = require('data/SplashData');
     var Timer         = require('famous/utilities/Timer');
-
-    var GenericSync     = require('famous/inputs/GenericSync');
-    var MouseSync       = require('famous/inputs/MouseSync');
-    var TouchSync       = require('famous/inputs/TouchSync');
-    GenericSync.register({'mouse': MouseSync, 'touch': TouchSync});
+    var Engine        = require('famous/core/Engine');
 
     function IntroView() {
         View.apply(this, arguments);
 
         _createLayout.call(this);
-        _createSync.call(this);
         _createFooter.call(this);
         _createSplashViews.call(this);
         _createZIPView.call(this);
@@ -42,14 +37,8 @@ define(function(require, exports, module) {
         firstClick: true,
         footerSize: 30,
         screenSize: [0,0],
+        currentIndex: 0
     };
-
-    function _createSync() {
-        this.sync = new GenericSync(
-            ['mouse', 'touch'],
-            {direction : GenericSync.DIRECTION_X}
-        );
-    }
 
     function _createLayout() {
         this.layout = new HeaderFooter({
@@ -57,7 +46,7 @@ define(function(require, exports, module) {
         });
 
         var layoutModifier = new StateModifier({
-            transform: Transform.translate(0, 0, 0)
+            transform: Transform.translate(0, 0, 1)
         });
 
         this.add(layoutModifier).add(this.layout);
@@ -74,7 +63,8 @@ define(function(require, exports, module) {
             var splashView = new SplashView({
                 featureUrl: SplashData[i].featureUrl,
                 content: SplashData[i].content,
-                button: SplashData[i].button
+                button: SplashData[i].button,
+                screenSize: this.options.screenSize
             });
 
             if(SplashData[i].button){
@@ -82,11 +72,9 @@ define(function(require, exports, module) {
             }
             splashView.surfaces[0].pipe(this.scrollView);
             splashView.surfaces[1].pipe(this.scrollView);
-
-            splashView.surfaces[0].pipe(this.sync);
-            splashView.surfaces[1].pipe(this.sync);
             this.splashViews.push(splashView);
         }
+        this.scrollView.pipe(this._eventInput);
         this.layout.content.add(this.scrollView);
     }
 
@@ -125,11 +113,11 @@ define(function(require, exports, module) {
         }
         this.dotModifiers[0].setOpacity(1);
 
-
         var gridModifier = new StateModifier({
             origin: [.5,.5],
             align: [.5,.5],
-            size: [55,7]
+            size: [55,7],
+            transform: Transform.translate(0,0,2)
         })
 
         this.layout.footer.add(backgroundSurface);
@@ -137,22 +125,18 @@ define(function(require, exports, module) {
     }
 
     function _syncHandling() {
-
-        Timer.setInterval(function(){
-            for(var i = 0; i<this.dotModifiers.length; i++){
-                this.dotModifiers[i].setOpacity(0.5);
+        this._eventInput.on('settle', function(){
+            if(this.options.currentIndex != this.scrollView.getCurrentIndex()){
+                this.dotModifiers[this.options.currentIndex].setOpacity(0.5);
+                this.options.currentIndex = this.scrollView.getCurrentIndex();
+                this.dotModifiers[this.options.currentIndex].setOpacity(1);
             }
-            if(this.scrollView.getVelocity()>0){
-                this.dotModifiers[Math.max(0,Math.floor((this.scrollView.getAbsolutePosition()-this.options.screenSize[0]/2)/this.options.screenSize[0])+1)].setOpacity(1);
-            } else {
-                this.dotModifiers[Math.max(0,Math.floor((this.scrollView.getAbsolutePosition())/this.options.screenSize[0]))].setOpacity(1);
-            }
-        }.bind(this), 10);
-
+        }.bind(this));
+        
         this._eventInput.on('buttonClick', (function(){
             if(this.options.firstClick){
                 this.zipModifier.setTransform(
-                    Transform.translate(0,0,0),
+                    Transform.translate(0,0,3),
                     { duration : 300, curve: 'easeOut'}
                 );
                 this.options.firstClick = false;
@@ -161,16 +145,16 @@ define(function(require, exports, module) {
             }
         }).bind(this));
     }
-
     function _createZIPView(){
         var zipView = new SplashView({
             content: "<h3>PLEASE CONFIRM YOUR ZIP CODE</h3>",
             featureUrl: "img/sfmap.jpg",
             button: true,
-            zip: true
+            zip: true,
+            screenSize: this.options.screenSize
         });
         this.zipModifier = new StateModifier({
-            transform: Transform.translate(3200,0,2)
+            transform: Transform.translate(3200,0,3)
         });
         this.subscribe(zipView.button);
         this.add(this.zipModifier).add(zipView);

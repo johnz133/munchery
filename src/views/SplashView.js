@@ -32,7 +32,8 @@ define(function(require, exports, module) {
         content: "",
         button: false,
         zip: false,
-        ratios: [6,4]
+        ratios: [6,4],
+        screenSize: [0,0]
     };
 
     function _createLayout() {
@@ -42,7 +43,8 @@ define(function(require, exports, module) {
         });
 
         this.layoutModifier = new StateModifier({
-            transform: Transform.translate(0, 0, 0)
+            transform: Transform.translate(0, 0, 0),
+            size: this.options.screenSize
         });
         this.surfaces = [];
 
@@ -73,11 +75,12 @@ define(function(require, exports, module) {
     function _createButton() {
         var buttonLayout = new FlexibleLayout({
             direction: 0,
-            ratios: [2,50,2]
+            ratios: [2,50,2],
+            size: [undefined, 44]
         });
         var buttonSurfaces = [];
         buttonSurfaces.push(new Surface({
-            size: [undefined, undefined],
+            size: [undefined, 44],
             properties: {
                 backgroundColor: 'rgb(244, 247, 248)'
             }
@@ -87,13 +90,14 @@ define(function(require, exports, module) {
             properties:{
                 color: 'white',
                 textAlign: 'center',
-                lineHeight: "40px",
+                lineHeight: "44px",
                 verticalAlign: "middle",
                 backgroundColor: 'rgb(240,114,73)'
-            }
+            },
+            size: [undefined, 44]
         }));
         buttonSurfaces.push(new Surface({
-            size: [undefined, undefined],
+            size: [undefined, 44],
             properties: {
                 backgroundColor: 'rgb(244, 247, 248)'
             }
@@ -104,8 +108,13 @@ define(function(require, exports, module) {
         });
         buttonLayout.sequenceFrom(buttonSurfaces);
         this.surfaces.push(buttonLayout);
-        this.layout.setRatios([24,13,3]);
-        
+        this.surfaces.push(new Surface({
+            size:[undefined,0],
+            properties: {
+                backgroundColor: 'rgb(244,247,248)'
+            }
+        }));
+        this.layout.setRatios([24,13,true,3]);
         
     }
 

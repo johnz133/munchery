@@ -5,44 +5,44 @@ define(function(require, exports, module) {
     var IntroView   = require('views/IntroView');
     var TitleView   = require('views/TitleView');
     var AppView		= require('views/AppView');
+    var Lightbox = require('famous/views/Lightbox');
 
     var Timer 		= require('famous/utilities/Timer');
     var StateModifier = require('famous/modifiers/StateModifier');
     var Transform   = require('famous/core/Transform');
     var mainContext = Engine.createContext();
 
-    //_createPageView.call(this);
 
-    
-    var introView = new IntroView({
-    	screenSize: mainContext.getSize()
+    this.lightbox = new Lightbox({
+    	inTransform: Transform.translate(0, 0, 1),
+    	outTransform: Transform.translate(0, 0, 1),
+    	inTransition: { curve: 'linear', duration: 300},
+    	outTransition: { curve: 'linear', duration: 300},
+    	inOpacity: 1,
+    	outOpacity: 0,
+    	overlap: true
     });
-
+    mainContext.add(this.lightbox);
+    var introView = new IntroView({ screenSize: mainContext.getSize() });
     var titleView = new TitleView();
-    var titleModifier = new StateModifier({
-    	opacity: 1,
-    	tranform: Transform.translate(0,0)
-    });
+    var appView = new AppView();
 
-    
-    mainContext.add(titleModifier).add(titleView);
-    mainContext.add(new StateModifier({tranform: Transform.translate(0,0,4)})).add(introView);
-    Timer.setTimeout(function(){
-	    titleModifier.setOpacity(0, { duration : 300, curve: 'easeOut'});
-	    titleModifier.setTransform(Transform.translate(0,0,-1), { duration : 600} );
-    },2000);
+    this.lightbox.show(titleView);
+    Timer.setTimeout(function () {
+    	this.lightbox.hide(titleView);
+    	this.lightbox.show(introView);
+    }.bind(this),1000);
+
     introView.on("exitIntro", function(){
-    	introView.render = function(){ return null; };
-    	titleModifier.setOpacity(1, { duration : 300, curve: 'easeIn'});
+    	this.lightbox.hide(introView);
+    	this.lightbox.show(titleView);
     	Timer.setTimeout(function(){
     		titleView.animate();
-    		_createPageView.call(this);
+    		Timer.setTimeout(function(){
+    			this.lightbox.hide(titleView);
+    			this.lightbox.show(appView);
+    		}.bind(this),2600);
     	}.bind(this),1000);
-
     }.bind(this));
-	
-    function _createPageView(){
-    	mainContext.add(new AppView());
-    }
 
 });

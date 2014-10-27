@@ -91,10 +91,10 @@ define(function(require, exports, module) {
         Timer.setTimeout(function(){
             this.forkModifier.setTransform(Transform.translate(-10,600,100), {duration:600, curve:'easeIn'});
             this.knifeModifier.setTransform(Transform.translate(10,600,100), {duration:600, curve:'easeIn'});
-            this.backgroundModifier.setOpacity(0, {duration:1200, curve: 'easeIn'});
+            //this.backgroundModifier.setOpacity(0, {duration:1200, curve: 'easeIn'});
             Timer.setTimeout(function () {
-                this.render = function(){ return null;};
-            }.bind(this), 1200);
+                //this.render = function(){ return null;};
+            }.bind(this), 600);
         }.bind(this), 2000);
 
     };
