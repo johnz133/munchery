@@ -14,8 +14,8 @@ define(function(require, exports, module) {
 
 
     this.lightbox = new Lightbox({
-    	inTransform: Transform.translate(0, 0, 2),
-    	outTransform: Transform.translate(0, 0, 2),
+    	inTransform: Transform.translate(0, 0, 0),
+    	outTransform: Transform.translate(0, 0, 0),
     	inTransition: { curve: 'linear', duration: 300},
     	outTransition: { curve: 'linear', duration: 300},
     	inOpacity: 1,

@@ -22,6 +22,13 @@ define(function(require, exports, module) {
     };
 
     function _createSurfaces() {
+        var backgroundSurface = new Surface({
+            size: [undefined, undefined],
+            properties: {
+                backgroundColor: 'rgb(244,247,248)'
+            }
+        });
+
         var muncheryImage = new ImageSurface({
             content: 'img/muncheryLogoNoKF.png',
             size:[210,150]
@@ -29,14 +36,7 @@ define(function(require, exports, module) {
         this.muncheryModifier = new StateModifier({
             align: [0.5, 0.5],
             origin: [.5, .5],
-            transform: Transform.translate(2,0,2),
-        });
-
-        var backgroundSurface = new Surface({
-            size: [undefined, undefined],
-            properties: {
-                backgroundColor: 'rgb(244,247,248)'
-            }
+            //transform: Transform.translate(2,0,0),
         });
 
         var knife = new ImageSurface({
@@ -68,7 +68,7 @@ define(function(require, exports, module) {
             origin: [0.5,0.5]
         })
         this.backgroundModifier = new StateModifier({
-            transform: Transform.translate(0,0,2)
+            //transform: Transform.translate(0,0,2)
         });
         this.add(this.knifeModifier).add(this.kRotateModifier).add(knife);
         this.add(this.forkModifier).add(this.rotateModifier).add(fork);
@@ -87,11 +87,11 @@ define(function(require, exports, module) {
             return Transform.rotateY(.1*this.options.rotate++);
         }.bind(this));
 
-        this.forkModifier.setTransform(Transform.translate(-10,-200,100), {duration:500, curve:'easeOut'});
-        this.knifeModifier.setTransform(Transform.translate(10,-200,100), {duration:600, curve:'easeIn'});
+        this.forkModifier.setTransform(Transform.translate(-10,-200,200), {duration:500, curve:'easeOut'});
+        this.knifeModifier.setTransform(Transform.translate(10,-200,200), {duration:600, curve:'easeIn'});
         Timer.setTimeout(function(){
-            this.forkModifier.setTransform(Transform.translate(-10,600,100), {duration:600, curve:'easeIn'});
-            this.knifeModifier.setTransform(Transform.translate(10,600,100), {duration:600, curve:'easeIn'});
+            this.forkModifier.setTransform(Transform.translate(-10,600,200), {duration:600, curve:'easeIn'});
+            this.knifeModifier.setTransform(Transform.translate(10,600,200), {duration:600, curve:'easeIn'});
             //this.backgroundModifier.setOpacity(0, {duration:1200, curve: 'easeIn'});
             Timer.setTimeout(function () {
                 //this.render = function(){ return null;};
