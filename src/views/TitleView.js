@@ -25,7 +25,7 @@ define(function(require, exports, module) {
         var backgroundSurface = new Surface({
             size: [undefined, undefined],
             properties: {
-                backgroundColor: 'rgb(244,247,248)'
+                backgroundColor: 'rgb(255,255,255)'
             }
         });
 
