@@ -87,11 +87,11 @@ define(function(require, exports, module) {
             return Transform.rotateY(.1*this.options.rotate++);
         }.bind(this));
 
-        this.forkModifier.setTransform(Transform.translate(-10,-200,200), {duration:500, curve:'easeOut'});
-        this.knifeModifier.setTransform(Transform.translate(10,-200,200), {duration:600, curve:'easeIn'});
+        this.forkModifier.setTransform(Transform.translate(-10,-200,50), {duration:500, curve:'easeOut'});
+        this.knifeModifier.setTransform(Transform.translate(10,-200,50), {duration:600, curve:'easeIn'});
         Timer.setTimeout(function(){
-            this.forkModifier.setTransform(Transform.translate(-10,600,200), {duration:600, curve:'easeIn'});
-            this.knifeModifier.setTransform(Transform.translate(10,600,200), {duration:600, curve:'easeIn'});
+            this.forkModifier.setTransform(Transform.translate(-10,600,50), {duration:600, curve:'easeIn'});
+            this.knifeModifier.setTransform(Transform.translate(10,600,50), {duration:600, curve:'easeIn'});
             //this.backgroundModifier.setOpacity(0, {duration:1200, curve: 'easeIn'});
             Timer.setTimeout(function () {
                 //this.render = function(){ return null;};
