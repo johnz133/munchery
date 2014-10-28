@@ -24,7 +24,7 @@ define(function(require, exports, module) {
     });
     mainContext.add(this.lightbox);
     var introView = new IntroView({ screenSize: mainContext.getSize() });
-    var titleView = new TitleView();
+    var titleView = new TitleView({ screenSize: mainContext.getSize() });
     var appView = new AppView();
 
     this.lightbox.show(titleView);

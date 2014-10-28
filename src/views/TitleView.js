@@ -19,6 +19,7 @@ define(function(require, exports, module) {
 
     TitleView.DEFAULT_OPTIONS = {
         rotate:10,
+        screenSize: [0,0]
     };
 
     function _createSurfaces() {
@@ -87,13 +88,20 @@ define(function(require, exports, module) {
             return Transform.rotateY(.1*this.options.rotate++);
         }.bind(this));
 
-        this.forkModifier.setTransform(Transform.translate(-10,-200,50), {duration:500, curve:'easeOut'});
-        this.knifeModifier.setTransform(Transform.translate(10,-200,50), {duration:600, curve:'easeIn'});
+        this.forkModifier.setTransform(Transform.translate(-10,-this.options.screenSize[1]/3,50), {duration:500, curve:'easeOut'});
+        this.knifeModifier.setTransform(Transform.translate(10,-this.options.screenSize[1]/3,50), {duration:600, curve:'easeIn'});
         Timer.setTimeout(function(){
-            this.forkModifier.setTransform(Transform.translate(-10,600,50), {duration:600, curve:'easeIn'});
-            this.knifeModifier.setTransform(Transform.translate(10,600,50), {duration:600, curve:'easeIn'});
+            this.forkModifier.setTransform(Transform.translate(-10,this.options.screenSize[1],50), {duration:600, curve:'easeIn'});
+            this.knifeModifier.setTransform(Transform.translate(10,this.options.screenSize[1],50), {duration:600, curve:'easeIn'});
             //this.backgroundModifier.setOpacity(0, {duration:1200, curve: 'easeIn'});
             Timer.setTimeout(function () {
+                this.rotateModifier.setTransform(function() {
+                    return Transform.rotateY(0);
+                }.bind(this));
+
+                this.kRotateModifier.setTransform(function() {
+                    return Transform.rotateY(0);
+                }.bind(this));
                 //this.render = function(){ return null;};
             }.bind(this), 600);
         }.bind(this), 2000);
