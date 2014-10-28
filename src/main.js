@@ -22,11 +22,16 @@ define(function(require, exports, module) {
     	outOpacity: 0,
     	overlap: true
     });
+
     mainContext.add(this.lightbox);
     var introView = new IntroView({ screenSize: mainContext.getSize() });
     var titleView = new TitleView({ screenSize: mainContext.getSize() });
-    var appView = new AppView();
+    var appView = new AppView({ screenSize: mainContext.getSize() });
+            //console.log(mainContext.getSize());
 
+    this.lightbox.show(appView);
+
+    /*
     this.lightbox.show(titleView);
     Timer.setTimeout(function () {
     	this.lightbox.hide(titleView);
@@ -44,5 +49,5 @@ define(function(require, exports, module) {
     		}.bind(this),2600);
     	}.bind(this),1000);
     }.bind(this));
-
+    */
 });

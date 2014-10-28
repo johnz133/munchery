@@ -28,7 +28,7 @@ define(function(require, exports, module) {
         var backing = new Surface({
             properties: {
                 backgroundColor: 'black',
-                boxShadow: '0 0 20px rgba(0,0,0,0.5)'
+                //boxShadow: '0 0 20px rgba(0,0,0,0.5)'
             }
         });
 

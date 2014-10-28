@@ -11,6 +11,7 @@ define(function(require, exports, module) {
 
     function TitleView() {
         View.apply(this, arguments);
+
         _createSurfaces.call(this);
     }
 

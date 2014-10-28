@@ -34,6 +34,8 @@ define(function(require, exports, module) {
     AppView.prototype.constructor = AppView;
 
     AppView.DEFAULT_OPTIONS = {
+        //change for dynamic screen size, or not..
+        screenSize: [0,0],
         openPosition: 276,
         transition: {
             duration: 300,
@@ -55,7 +57,10 @@ define(function(require, exports, module) {
     }
 
     function _createMenuView() {
-        this.menuView = new MenuView({ stripData: StripData });
+        this.menuView = new MenuView({ 
+            stripData: StripData,
+            screenSize: this.options.screenSize
+        });
 
         var menuModifier = new StateModifier({
             transform: Transform.behind
@@ -82,8 +87,8 @@ define(function(require, exports, module) {
                 this.menuView.animateStrips();
             }
             if(this.menuToggle){
-                this.pageViewPos.set(Math.max(0, currentPosition + data.delta));
-            }
+                this.pageViewPos.set(Math.max(0, Math.min(276, currentPosition + data.delta)));
+            } 
         }.bind(this));
 
         sync.on('end', (function(data) {
@@ -94,11 +99,14 @@ define(function(require, exports, module) {
                 if(velocity < -this.options.velThreshold) {
                     this.slideLeft();
                 } else {
-                    this.slideRight();
+                    this.slideLeft();
+                    //this.slideRight();
+                    //console.log("pp");
                 }
             } else {
                 if(velocity > this.options.velThreshold) {
-                    this.slideRight();
+                    //this.slideRight();
+                    //console.log("as");
                 } else {
                     this.slideLeft();
                 }
@@ -111,7 +119,7 @@ define(function(require, exports, module) {
             this.slideLeft();
         } else {
             this.slideRight();
-            this.menuView.animateStrips();
+            //this.menuView.animateStrips();
         }
     };
 
