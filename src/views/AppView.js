@@ -49,7 +49,7 @@ define(function(require, exports, module) {
         this.pageView = new PageView();
         this.pageModifier = new Modifier({
             transform: function() {
-                return Transform.translate(this.pageViewPos.get(), 0, 0);
+                return Transform.translate(this.pageViewPos.get(), 0, 1);
             }.bind(this)
         });
 

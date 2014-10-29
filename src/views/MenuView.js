@@ -19,14 +19,14 @@ define(function(require, exports, module) {
         });
 
         var layoutModifier = new StateModifier({
-            //transform: Transform.translate(0, 0, 1)
+            transform: Transform.translate(0, 0, 0.5)
         });
 
         this.add(layoutModifier).add(this.layout);
 
         var contentBack = new Surface({
             properties: {
-                backgroundColor: 'rgb(244,247,248)',
+                backgroundColor: 'rgb(244,2247,248)',
             }
         });
 
@@ -34,7 +34,7 @@ define(function(require, exports, module) {
 
         var headerBack = new Surface({
             properties: {
-                backgroundColor: 'rgb(8,248,248)',
+                backgroundColor: 'rgb(248,248,248)',
             },
             size: [276, undefined]
         });
