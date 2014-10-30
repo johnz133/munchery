@@ -63,7 +63,7 @@ define(function(require, exports, module) {
                 color: 'black',
                 fontSize: '14px',
                 letterSpacing: '1px',
-                //fontWeight: 'lighter',
+                fontWeight: 'lighter',
                 textAlign: 'center',
                 lineHeight: "44px",
                 verticalAlign: "middle"
