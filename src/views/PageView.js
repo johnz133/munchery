@@ -61,6 +61,7 @@ define(function(require, exports, module) {
             content : 'Today 10/28',
             properties:{
                 color: 'black',
+                fontSize: '12px',
                 textAlign: 'center',
                 lineHeight: "44px",
                 verticalAlign: "middle"

@@ -1,5 +1,12 @@
 html {
-    font-family: 'AvenirNextCondensed-DemiBold';
+    font-family: 'munchery';
+}
+
+@font-face {
+	font-family: "munchery"; 
+	src: url('fonts/munchery.woff') format('woff');	
+	font-weight:500; 
+	font-style:normal;  
 }
 
 body {
