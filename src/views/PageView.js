@@ -52,7 +52,7 @@ define(function(require, exports, module) {
         var backgroundSurface = new Surface({
             properties: {
                 backgroundColor: 'white',
-                boxShadow: '0 0 1px 0 rgba(150,150,150,0)'
+                boxShadow: '0 0 1px 0 rgba(150,150,150,.5)'
             }
         });
 
@@ -80,22 +80,25 @@ define(function(require, exports, module) {
         });
 
         var backgroundModifier = new StateModifier({
-            transform : Transform.behind
+            transform : Transform.translate(0,0,2)
         });
 
         var hamburgerModifier = new StateModifier({
             origin: [0, 0.5],
-            align : [0, 0.5]
+            align : [0, 0.5],
+            transform : Transform.translate(0,0,2)
         });
 
         var searchModifier = new StateModifier({
             origin: [0.5, 0.5],
-            align : [0.5, 0.5]
+            align : [0.5, 0.5],
+            transform : Transform.translate(0,0,2)
         });
 
         var iconModifier = new StateModifier({
             origin: [1, 0.5],
-            align : [1, 0.5]
+            align : [1, 0.5],
+            transform : Transform.translate(0,0,2)
         });
 
         this.layout.header.add(backgroundModifier).add(backgroundSurface);
@@ -134,6 +137,28 @@ define(function(require, exports, module) {
         this.exampleDishes.push(dish3);
         this.layout.content.add(this.scrollView);
 
+        this.filter = new ImageSurface({
+            size: [undefined, 401],
+            content: 'img/exampleFilter.jpg'
+        });
+
+        this.filterMod = new StateModifier({
+            transform: Transform.translate(0,33,1),
+            origin: [0,1],
+            align:[0,0]
+        });
+        this.layout.content.add(this.filterMod).add(this.filter);
+        this.toggle = true;
+        this.filter.on('click', function(){
+            if(this.toggle){
+                this.filterMod.setTransform(Transform.translate(0,401,1), {duration: 300});
+                this.toggle = false;
+            } else {
+                this.filterMod.setTransform(Transform.translate(0,33,1), {duration: 300, curve:'linear'});
+                this.toggle = true;
+            }
+            //this.toggle != this.toggle;
+        }.bind(this));
         /*
         for (var i = 0; i < 3; i++) {
             var splashView = new SplashView({
@@ -165,7 +190,12 @@ define(function(require, exports, module) {
             this._eventOutput.emit('menuToggle');
         }.bind(this));
 
-        //this.bodySurface.pipe(this._eventOutput);
+
+        for(var i = 0; i < 3; i++){
+            this.exampleDishes[i].pipe(this._eventOutput);
+        }
+        
+        //this.layout.content.pipe(this._eventOutput);
     }
 
     module.exports = PageView;
