@@ -58,10 +58,12 @@ define(function(require, exports, module) {
 
         var searchSurface = new Surface({
             //size: [232, 44],
-            content : 'Tomorrow 10/29',
+            content : 'Tomorrow 10/30',
             properties:{
                 color: 'black',
-                fontSize: '12px',
+                fontSize: '14px',
+                letterSpacing: '1px',
+                fontWeight: 'lighter',
                 textAlign: 'center',
                 lineHeight: "44px",
                 verticalAlign: "middle"
