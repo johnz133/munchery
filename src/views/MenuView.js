@@ -7,6 +7,8 @@ define(function(require, exports, module) {
     var StateModifier = require('famous/modifiers/StateModifier');
     var Timer         = require('famous/utilities/Timer');
     var HeaderFooter  = require('famous/views/HeaderFooterLayout');
+    var ImageSurface  = require('famous/surfaces/ImageSurface');
+
     var StripView     = require('views/StripView');
     var FeaturedView  = require('views/FeaturedView');
 
@@ -26,7 +28,7 @@ define(function(require, exports, module) {
 
         var contentBack = new Surface({
             properties: {
-                backgroundColor: 'rgb(244,2247,248)',
+                backgroundColor: 'rgb(244,247,248)',
             }
         });
 
@@ -76,6 +78,12 @@ define(function(require, exports, module) {
             transform: Transform.translate(226,0,0)
         });
         this.layout.header.add(signUpModifier).add(signUp);
+
+        var dummyMenuView = new ImageSurface({
+            content: 'img/menutemp.jpg',
+            size: [290, 182]
+        });
+        this.layout.content.add(dummyMenuView);
         //_createStripViews.call(this);
         //_createFeaturedView.call(this);
     }

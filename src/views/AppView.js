@@ -41,7 +41,7 @@ define(function(require, exports, module) {
             duration: 300,
             curve: 'easeOut'
         },
-        posThreshold: 138,
+        posThreshold: 250,
         velThreshold: 0.75
     };
 
@@ -84,7 +84,7 @@ define(function(require, exports, module) {
         sync.on('update', function(data) {
             var currentPosition = this.pageViewPos.get();
             if(currentPosition === 0 && data.velocity > 0) {
-                this.menuView.animateStrips();
+                //this.menuView.animateStrips();
             }
             if(this.menuToggle){
                 this.pageViewPos.set(Math.max(0, Math.min(276, currentPosition + data.delta)));
@@ -99,8 +99,8 @@ define(function(require, exports, module) {
                 if(velocity < -this.options.velThreshold) {
                     this.slideLeft();
                 } else {
-                    this.slideLeft();
-                    //this.slideRight();
+                    //this.slideLeft();
+                    this.slideRight();
                     //console.log("pp");
                 }
             } else {

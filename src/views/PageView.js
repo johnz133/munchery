@@ -5,6 +5,7 @@ define(function(require, exports, module) {
     var StateModifier   = require('famous/modifiers/StateModifier');
     var HeaderFooter    = require('famous/views/HeaderFooterLayout');
     var ImageSurface    = require('famous/surfaces/ImageSurface');
+    var ScrollView      = require('famous/views/Scrollview');
 
     function PageView() {
         View.apply(this, arguments);
@@ -51,23 +52,31 @@ define(function(require, exports, module) {
         var backgroundSurface = new Surface({
             properties: {
                 backgroundColor: 'white',
-                boxShadow: '0 0 1px 0 rgba(0,0,0,0.5)'
+                boxShadow: '0 0 1px 0 rgba(150,150,150,0)'
             }
+        });
+
+        var searchSurface = new Surface({
+            //size: [232, 44],
+            content : 'Today 10/28',
+            properties:{
+                color: 'black',
+                textAlign: 'center',
+                lineHeight: "44px",
+                verticalAlign: "middle"
+                //backgroundColor: 'rgb(240,114,73)'
+            },
         });
 
         this.hamburgerSurface = new ImageSurface({
             size: [44, 44],
-            content : 'img/hamburger.png'
+            content : 'img/hamburger.png' //rename to hamburger?
         });
 
-        var searchSurface = new ImageSurface({
-            size: [232, 44],
-            content : 'img/search.png'
-        });
 
         var iconSurface = new ImageSurface({
             size: [44, 44],
-            content : 'img/icon.png'
+            content : 'img/shoppingbagicon.png'
         });
 
         var backgroundModifier = new StateModifier({
@@ -96,12 +105,59 @@ define(function(require, exports, module) {
     }
 
     function _createBody() {
+        this.scrollView = new ScrollView({
+            direction: 1,
+            groupScroll: true
+        });
+        this.exampleDishes = [];
+        this.scrollView.sequenceFrom(this.exampleDishes);
+
+        var dish1 = new ImageSurface({
+            size: [320, 380],
+            content: 'img/exampledish1.jpg'
+        });
+
+        this.exampleDishes.push(dish1);
+
+        var dish2 = new ImageSurface({
+            size: [320, 380],
+            content: 'img/exampledish2.png'
+        });
+
+        this.exampleDishes.push(dish2);
+
+        var dish3 = new ImageSurface({
+            size: [320, 380],
+            content: 'img/exampledish3.png'
+        });
+
+        this.exampleDishes.push(dish3);
+        this.layout.content.add(this.scrollView);
+
+        /*
+        for (var i = 0; i < 3; i++) {
+            var splashView = new SplashView({
+                featureUrl: SplashData[i].featureUrl,
+                content: SplashData[i].content,
+                button: SplashData[i].button,
+                screenSize: this.options.screenSize
+            });
+
+            if(SplashData[i].button){
+                this.subscribe(splashView.button);
+            }
+            splashView.surfaces[0].pipe(this.scrollView);
+            splashView.surfaces[1].pipe(this.scrollView);
+            this.splashViews.push(splashView);
+        }
+        /*
         this.bodySurface = new ImageSurface({
             size : [undefined, true],
             content : 'img/body.png'
         });
 
         this.layout.content.add(this.bodySurface);
+        */
     }
 
     function _setListeners() {
@@ -109,7 +165,7 @@ define(function(require, exports, module) {
             this._eventOutput.emit('menuToggle');
         }.bind(this));
 
-        this.bodySurface.pipe(this._eventOutput);
+        //this.bodySurface.pipe(this._eventOutput);
     }
 
     module.exports = PageView;
