@@ -80,7 +80,6 @@ define(function(require, exports, module) {
         );
 
         this.pageView.pipe(sync);
-
         sync.on('update', function(data) {
             var currentPosition = this.pageViewPos.get();
             if(currentPosition === 0 && data.velocity > 0) {

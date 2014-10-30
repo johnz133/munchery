@@ -165,7 +165,7 @@ define(function(require, exports, module) {
             this._eventOutput.emit('menuToggle');
         }.bind(this));
 
-        //this.bodySurface.pipe(this._eventOutput);
+        this.scrollView.pipe(this._eventOutput);
     }
 
     module.exports = PageView;
