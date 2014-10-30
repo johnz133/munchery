@@ -1,11 +1,13 @@
 html {
-    font-family: 'munchery';
+    font-family: 'Helvetica', Arial, sans-serif;
+    letter-spacing: 1px;
+    font-weight: lighter;
 }
 
 @font-face {
 	font-family: "munchery"; 
 	src: url('fonts/munchery.woff') format('woff');	
-	font-weight:500; 
+	font-weight:100; 
 	font-style:normal;  
 }
 
