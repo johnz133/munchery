@@ -28,9 +28,9 @@ define(function(require, exports, module) {
     var titleView = new TitleView({ screenSize: mainContext.getSize() });
     var appView = new AppView({ screenSize: mainContext.getSize() });
 
-    //this.lightbox.show(appView);
+    this.lightbox.show(appView);
 
-    
+    /*
     this.lightbox.show(titleView);
     Timer.setTimeout(function () {
     	this.lightbox.hide(titleView);
@@ -48,5 +48,5 @@ define(function(require, exports, module) {
     		}.bind(this),2600);
     	}.bind(this),1000);
     }.bind(this));
-    
+    */
 });
