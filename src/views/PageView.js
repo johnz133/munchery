@@ -115,6 +115,7 @@ define(function(require, exports, module) {
         this.exampleDishes = [];
         this.scrollView.sequenceFrom(this.exampleDishes);
 
+        //each dish is a view
         var dish1 = new ImageSurface({
             size: [320, 380],
             content: 'img/exampledish1.jpg'
@@ -137,6 +138,36 @@ define(function(require, exports, module) {
         this.exampleDishes.push(dish3);
         this.layout.content.add(this.scrollView);
 
+        this.dimmer = new Surface({
+            size: [ undefined, undefined],
+            properties:{
+                //color: 'white',
+                //textAlign: 'center',
+                //lineHeight: "33px",
+                //verticalAlign: "middle",
+                backgroundColor: 'rgb(206,217,227)'
+            }
+        });
+        this.dimmerMod = new StateModifier({
+            transform: Transform.translate(0,0,-1),
+            opacity: 0
+        });
+        this.layout.content.add(this.dimmerMod).add(this.dimmer);
+        //filter is a view
+        this.dimmer.on('click', function(){
+            if(!this.filterToggle){
+                this.filterMod.setTransform(Transform.translate(0,33,1), {duration: 200, curve:'linear'});
+                this.dimmerMod.setOpacity(0, {duration:200});
+                this.dimmerMod.setTransform(Transform.translate(0,0,-1), {duration: 200, curve:"easeIn"});
+                this.filterToggle = true;
+            }
+            if(!this.footerToggle){
+                this.footerMod.setTransform(Transform.translate(0,-55,1), {duration:200});
+                this.dimmerMod.setOpacity(0, {duration:200});
+                this.dimmerMod.setTransform(Transform.translate(0,0,-1), {duration:200, curve:"easeIn"});
+                this.footerToggle = true;
+            }
+        }.bind(this));
         this.filter = new ImageSurface({
             size: [undefined, 401],
             content: 'img/exampleFilter.jpg'
@@ -148,17 +179,50 @@ define(function(require, exports, module) {
             align:[0,0]
         });
         this.layout.content.add(this.filterMod).add(this.filter);
-        this.toggle = true;
+        this.filterToggle = true;
         this.filter.on('click', function(){
-            if(this.toggle){
-                this.filterMod.setTransform(Transform.translate(0,401,1), {duration: 300});
-                this.toggle = false;
+            if(this.filterToggle){
+                this.filterMod.setTransform(Transform.translate(0,401,1.5), {duration: 200});
+                this.dimmerMod.setTransform(Transform.translate(0,0,1.1));
+                this.dimmerMod.setOpacity(.9, {duration:200});
+                //this.filterToggle = false;
             } else {
-                this.filterMod.setTransform(Transform.translate(0,33,1), {duration: 300, curve:'linear'});
-                this.toggle = true;
+                this.filterMod.setTransform(Transform.translate(0,33,1), {duration: 200, curve:'linear'});
+                this.dimmerMod.setOpacity(0, {duration:200});
+                this.dimmerMod.setTransform(Transform.translate(0,0,-1), {duration:200, curve:"easeIn"});
+
+                //this.filterToggle = true;
             }
-            //this.toggle != this.toggle;
+            this.filterToggle = !this.filterToggle;
         }.bind(this));
+
+        this.footer = new ImageSurface({
+            size: [undefined,197],
+            content: 'img/examplefooter.jpg'
+        });
+
+        this.footerMod = new StateModifier({
+            transform: Transform.translate(0,-55,1),
+            origin: [0,0],
+            align: [0,1]
+        });
+
+        this.layout.content.add(this.footerMod).add(this.footer);
+        this.footerToggle = true;
+        this.footer.on('click', function(){
+            if(this.footerToggle){
+                this.footerMod.setTransform(Transform.translate(0,-197,1.5), {duration:200});
+                this.dimmerMod.setTransform(Transform.translate(0,0,1.1));
+                this.dimmerMod.setOpacity(.9, {duration:200});
+            } else {
+                this.footerMod.setTransform(Transform.translate(0,-55,1), {duration:200});
+                this.dimmerMod.setOpacity(0, {duration:200});
+                this.dimmerMod.setTransform(Transform.translate(0,0,-1), {duration:200, curve:"easeIn"});
+            }
+            this.footerToggle = !this.footerToggle;
+        }.bind(this));
+
+
         /*
         for (var i = 0; i < 3; i++) {
             var splashView = new SplashView({
